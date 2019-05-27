@@ -1,55 +1,46 @@
 import topCoins as topCoins
 import myCoins as myCoins
+from stringTemplates import StringTemplates
 
 def main():
   while True:
+    # Get input from user to navigate
+    home_Input = input(StringTemplates.home_input_string)
 
-    home_Input = input\
-  (
-  """
-  1. See Top 20 Coins
-  2. My Coins
-  q. Quit Program
-  """
-  )
-
+    # If answer is 'q' the program will stop
     if(home_Input.lower() == "q"):
-      break 
+      break
+
+    # If answer is '1' the program will call 'displayTop20()' from topCoins and display top 20 coins
     elif(home_Input == "1"):
-      topCoins.main()
+
+      # Calling displayTop20()
+      topCoins.displayTop20()
 
       while True:
 
-        top20_Input = input\
-  (
-  """
-  1. Search for Coin
-  2. Sort by name
-  3. Sort by daily change
-  4. Go back
-  """
-  )
+        # Get
+        top20_Input = input(StringTemplates.top20_input_string)
 
         if top20_Input == "1":
           myCoins.searchForCoin()
 
         elif top20_Input == "2":
 
-          topCoins.TopCoin.top20.sort(key=lambda x: x.name)
-          
-          print('\nSORTED BY NAME')
-          print('------------------------')
-          for coin in topCoins.TopCoin.top20:
+          topCoins.TopCoin.top20List.sort(key=lambda x: x.name)
+
+          print(StringTemplates.sortedByName)
+
+          for coin in topCoins.TopCoin.top20List:
             print(coin)
           print()
 
         elif top20_Input == "3":
           
-          topCoins.TopCoin.top20.sort(key=lambda x: x.change, reverse=True)
+          topCoins.TopCoin.top20List.sort(key=lambda x: x.change, reverse=True)
+          print(StringTemplates.sortedByDailyChange)
 
-          print('\nSORTED BY DAILY CHANGE %')
-          print('------------------------')
-          for coin in topCoins.TopCoin.top20:
+          for coin in topCoins.TopCoin.top20List:
             print(coin)
           print() 
 
@@ -57,21 +48,16 @@ def main():
           break
 
     elif home_Input == "2":
-      
       while True:
-        print('\nMY COINS')
-        print('---------------')
-
+        print(StringTemplates.myCoins)
         if len(myCoins.MyCoins.myListOfCoins) > 0:
           for coin in myCoins.MyCoins.myListOfCoins:
             print(coin)
         else:
           print('Currently no coins added')
 
-        bookmark_input = input('\n1. Update coins\n'
-                                '2. Add coin\n'
-                                '3. Delete coin\n'
-                                '4. Go back\n')
+        bookmark_input = input(StringTemplates.bookmark_input_string)
+
         if bookmark_input == '1':
           myCoins.updateCoins()                          
 
