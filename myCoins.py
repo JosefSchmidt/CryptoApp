@@ -1,5 +1,4 @@
 import requests
-import json
 from coin import Coin
 
 class MyCoins:
@@ -16,7 +15,7 @@ def searchForCoin():
     response = (requests.get(url)).json()
     
     try:
-        print('\nname: {}'.format(response['id']))
+        print('\nName: {}'.format(response['id']))
         print('Current Market Price: {}\n'.format(response['market_data']['current_price']['usd']))
         print('Description: \n{}\n\n'.format(response['description']['en']) )
     except:
@@ -32,7 +31,7 @@ def addCoin():
 
     try:        
         MyCoins.myListOfCoins.append(Coin(selectCoin, response["market_data"]['current_price']['usd'], response["market_data"]['price_change_percentage_24h']))
-        print(f'\nAdded coin: {selectCoin}')
+        print('\nAdded coin: {}'.format(selectCoin))
     except (IndexError, KeyError):
         print('\nCould not find coin. Unexpected response after typed coin: ',
               response)

@@ -10,4 +10,4 @@ class Coin:
         whiteSpaceName = "              "   
         whiteSpacePrice = "             "
 
-        return f"Name:{whiteSpaceName}{self.name}\nPrice:{whiteSpacePrice}{self.price} usd\n24 hour % change:  {self.change} %\n\n"
+        return "Name:{}{}\nPrice:{}{} usd\n24 hour % change:  {} %\n\n".format(whiteSpaceName, self.name, whiteSpacePrice, self.price, self.change)
