@@ -39,7 +39,7 @@ def addCoin():
 
     try:
         response = (requests.get(url)).json()
-        MyCoins.4.append(Coin(selectCoin, response["market_data"]['current_price']['usd'], response["market_data"]['price_change_percentage_24h']))
+        MyCoins.append(Coin(selectCoin, response["market_data"]['current_price']['usd'], response["market_data"]['price_change_percentage_24h']))
         print('\nAdded coin: {}'.format(selectCoin))
 
     except (requests.exceptions.RequestException, ConnectionResetError) as error:
