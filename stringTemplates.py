@@ -1,5 +1,8 @@
 class StringTemplates:
 
+# Here the string methods are defined. This makes the code more readable.
+# The variables are called in the main.py file.
+
     sortedByName = \
 (
 """
