@@ -1,8 +1,12 @@
-import topCoins as topCoins
-import myCoins as myCoins
+from topCoins import TopCoin
+from myCoins import MyCoins
 from stringTemplates import StringTemplates
 
 def main():
+
+  topCoin = TopCoin()
+  myCoins = MyCoins()
+
   while True:
     # Get input from user to navigate
     home_Input = input(StringTemplates.home_input_string)
@@ -11,13 +15,13 @@ def main():
     if(home_Input.lower() == "q"):
       break
 
-    # If answer is '1' the program will call 'displayTop20()' from topCoins and display top 20 coins
+    # If answer is '1' the program will call 'displayTop20()' from topCoins and display top 20 crypto coins
     elif(home_Input == "1"):
 
       # Calling displayTop20()
-      topCoins.displayTop20()
+      topCoin.displayTop20()
 
-      # Going in to a while loop so program doesn't stop
+      # Doing a while loop so program doesn't stop
       while True:
 
         # Get user input and display template string from StringTemplates
@@ -25,32 +29,38 @@ def main():
 
         # If user input is '1' call 'searchForCoins()'
         if top20_Input == "1":
-          myCoins.searchForCoin()
+
+          # User input
+          selectCoin = input('Coin name: ')
+
+          # Calling searchForCoin and using selectCoin as parameter
+          topCoin.searchForCoin(selectCoin)
 
         # Else if user input is '2' sort top20List by name.
         elif top20_Input == "2":
 
-          # Sorting the list from here because top20List is static
-          topCoins.TopCoin.top20List.sort(key=lambda x: x.name)
+          # Sorting the top20List from here
+          topCoin.top20List.sort(key=lambda x: x.name)
 
           # Prints the StringTemplates string 'sortedByName'
           print(StringTemplates.sortedByName)
 
-          # Prints all the coins from the static top20List
-          for coin in topCoins.TopCoin.top20List:
+          # Prints all the coins from top20List
+          for coin in topCoin.top20List:
             print(coin)
           print()
 
-        # If user input is '3' sort top20List by change
+        # If user input is '3' sort top20List by daily change in percent
         elif top20_Input == "3":
 
           # Sorting the my20List - notice that the list is reversed so the highest value comes first
-          topCoins.TopCoin.top20List.sort(key=lambda x: x.change, reverse=True)
+          topCoin.top20List.sort(key=lambda x: x.change, reverse=True)
+
           # Prints the StringTemplates string 'sortedByDailyChange'
           print(StringTemplates.sortedByDailyChange)
 
-          # Prints all the coins from the static top20List
-          for coin in topCoins.TopCoin.top20List:
+          # Prints all the coins from the top20List
+          for coin in topCoin.top20List:
             print(coin)
           print() 
 
@@ -58,7 +68,7 @@ def main():
         elif top20_Input == "4":
           break
 
-    # If user input is '2' navigate to user Bookmark section
+    # If user input is '2' navigate 'My Coins' section
     elif home_Input == "2":
 
       while True:
@@ -66,8 +76,9 @@ def main():
         print(StringTemplates.myCoins)
 
         # If the length of myListOfCoins is bigger than 0 print the coins
-        if len(myCoins.MyCoins.myListOfCoins) > 0:
-          for coin in myCoins.MyCoins.myListOfCoins:
+        if len(myCoins.myListOfCoins) > 0:
+
+          for coin in myCoins.myListOfCoins:
             print(coin)
         else:
           # If the length of myListOfCoins is 0 or less print the 'Currently no coins added' message
@@ -78,18 +89,27 @@ def main():
 
         # If user input is '1' call updateCoins()
         if bookmark_input == '1':
+
           # Updates the market value for the saved coins and their daily change in %
-          myCoins.updateCoins()                          
+          myCoins.updateCoins()
 
         # If user input is '2' call addCoin()
         elif bookmark_input == '2':
+
           # Allows user to add a coin
-          myCoins.addCoin()
+          coinName = input('Coin name: ')
+
+          # Call addCoin() with parameter coinName
+          myCoins.addCoin(coinName)
 
         # If user input is '3' call deleteCoin()
         elif bookmark_input == '3':
-          # Allows user to delete a coin
-          myCoins.deleteCoin()
+
+          # Asks the user to type the coins name to be deleted
+          coinName = input('Coin name')
+
+          # Calls deleteCoin with parameter coinName
+          myCoins.deleteCoin(coinName)
 
         # If user input is '4' break the loop
         elif bookmark_input == '4':

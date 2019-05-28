@@ -51,3 +51,10 @@ class StringTemplates:
   4. Go back
 """
 )
+    top20Title = \
+(
+"""
+     TOP 20 CRYPTOCOINS
+----------------------------
+"""
+)
